@@ -8,7 +8,7 @@ class TeamModel with _$TeamModel {
   const factory TeamModel({
     required int id,
     required String name,
-    required String crestUrl,
+    String? crestUrl,
   }) = _TeamModel;
 
   factory TeamModel.fromJson(Map<String, dynamic> json) =>

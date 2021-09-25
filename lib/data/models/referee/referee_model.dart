@@ -9,7 +9,7 @@ class RefereeModel with _$RefereeModel {
     required int id,
     required String name,
     required String role,
-    required String nationality,
+    String? nationality,
   }) = _RefereeModel;
 
   factory RefereeModel.fromJson(Map<String, dynamic> json) =>
