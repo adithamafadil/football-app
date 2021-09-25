@@ -50,3 +50,6 @@ app.*.map.json
 *.freezed.dart
 *.g.dart
 *.gr.dart
+
+# Auth key
+header_config.dart

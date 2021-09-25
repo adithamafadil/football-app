@@ -7,5 +7,4 @@ final inject = GetIt.instance;
 
 /// Configure dependencies method that takes `environment` as [String]
 @InjectableInit()
-Future<void> configureDependencies({required String environment}) async =>
-    $initGetIt(inject, environment: environment);
+Future<void> configureDependencies() async => $initGetIt(inject);

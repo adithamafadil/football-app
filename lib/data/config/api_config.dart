@@ -5,10 +5,9 @@ abstract class ApiConfig {
   late String url;
 }
 
-/// `FootballApi` that will alias into [ApiConfig] with `production` environment.
-@Environment('production')
+/// `FootballApi` that will alias into [ApiConfig]
 @LazySingleton(as: ApiConfig)
 class FootballApi implements ApiConfig {
   @override
-  String url = 'https://api.football-data.org/v2/';
+  String url = 'https://api.football-data.org/v2/competitions/';
 }
