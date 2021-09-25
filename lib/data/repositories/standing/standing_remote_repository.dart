@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:football_app/data/config/api_config.dart';
+import 'package:football_app/data/config/header_config.dart';
 import 'package:football_app/data/models/standing/standing_model.dart';
 import 'package:football_app/data/states/remote/remote_state.dart';
 import 'package:http/http.dart' as http;
@@ -13,15 +14,22 @@ import 'package:injectable/injectable.dart';
 class StandingRemoteRepository {
   final ApiConfig _apiConfig;
   final http.Client _client;
+  final HeaderConfig _headerConfig;
 
-  const StandingRemoteRepository(this._apiConfig, this._client);
+  const StandingRemoteRepository(
+    this._apiConfig,
+    this._client,
+    this._headerConfig,
+  );
 
   Future<RemoteState<StandingResponseModel>> getStandings(
       String competitionId) async {
     try {
       String url = '${_apiConfig.url}/$competitionId/standings';
 
-      var response = await _client.get(Uri.parse(url));
+      var response = await _client.get(Uri.parse(url), headers: {
+        'X-auth-Token': _headerConfig.header,
+      });
 
       if (response.statusCode == 200) {
         return RemoteState.success(StandingResponseModel.fromJson(
