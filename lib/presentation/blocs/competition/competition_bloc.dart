@@ -20,6 +20,8 @@ class CompetitionBloc extends Bloc<CompetitionEvent, CompetitionState> {
   Stream<CompetitionState> mapEventToState(CompetitionEvent event) async* {
     yield* event.map(getCompetitions: (e) async* {
       yield* _handleGetCompetitions(e);
+    }, getSelectedCompetitions: (e) async* {
+      yield* _handleGetSelectedCompetitions(e);
     });
   }
 
@@ -48,5 +50,10 @@ class CompetitionBloc extends Bloc<CompetitionEvent, CompetitionState> {
         );
       },
     );
+  }
+
+  Stream<CompetitionState> _handleGetSelectedCompetitions(
+      GetSelectedCompetitions e) async* {
+    yield state.copyWith(selectedCompetition: state.competitionList[e.index]);
   }
 }

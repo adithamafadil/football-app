@@ -5,6 +5,7 @@ class CompetitionState with _$CompetitionState {
   const factory CompetitionState({
     required EntityState competitionState,
     required List<CompetitionModel> competitionList,
+    CompetitionModel? selectedCompetition,
   }) = _CompetitionState;
 
   factory CompetitionState.initial() => const CompetitionState(

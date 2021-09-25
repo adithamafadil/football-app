@@ -12,7 +12,6 @@ part 'standing_bloc.freezed.dart';
 @injectable
 class StandingBloc extends Bloc<StandingEvent, StandingState> {
   final StandingRemoteRepository _repository;
-
   StandingBloc(this._repository) : super(StandingState.initial());
 
   @override
