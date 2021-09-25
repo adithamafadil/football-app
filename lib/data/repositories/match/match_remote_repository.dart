@@ -9,6 +9,7 @@ import 'package:football_app/data/models/match/match_model.dart';
 import 'package:football_app/data/states/remote/remote_state.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 @lazySingleton
 class MatchRemoteRepository {
@@ -25,7 +26,13 @@ class MatchRemoteRepository {
   Future<RemoteState<MatchResponseModel>> getMatches(
       String competitionId) async {
     try {
-      String url = '${_apiConfig.url}/$competitionId/matches';
+      String dateFrom = DateFormat(('yyyy-MM-dd'))
+          .format(DateTime.now().add(const Duration(days: -14)));
+      String dateTo = DateFormat(('yyyy-MM-dd'))
+          .format(DateTime.now().add(const Duration(days: 14)));
+
+      String url =
+          '${_apiConfig.url}/$competitionId/matches?dateFrom=$dateFrom&dateTo=$dateTo';
 
       var response = await _client.get(Uri.parse(url), headers: {
         'X-auth-Token': _headerConfig.header,
