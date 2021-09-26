@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_app/data/models/models.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
@@ -39,8 +42,15 @@ class MatchTab extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    Text(DateFormat('EEE, d MMM yyyy')
-                        .format(DateTime.parse(matchDates[dateIndex]))),
+                    Text(
+                      DateFormat(
+                        'EEE, d MMM yyyy',
+                      ).format(DateTime.parse(matchDates[dateIndex])),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                     GridView.builder(
                       shrinkWrap: true,
                       gridDelegate:
@@ -58,19 +68,51 @@ class MatchTab extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(24),
-                              border: Border.all(color: Colors.grey.shade300),
+                              color: Colors.white,
+                              // borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.indigo.shade100),
                             ),
-                            child: Row(
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                    '${match.homeTeam.name}\n${match.awayTeam.name}'),
-                                Text(match.status),
-                                WinnerScore(
-                                  awayTeam: awayTeamScore,
-                                  homeTeam: homeTeamScore,
-                                )
+                                  'UTC ${DateFormat('HH:mm').format(match.utcDate)} / ${DateFormat('HH:mm').format(match.utcDate.toLocal())} Local Time',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          match.homeTeam.name,
+                                          style: awayTeamScore > homeTeamScore
+                                              ? const TextStyle(
+                                                  fontWeight: FontWeight.w300)
+                                              : null,
+                                        ),
+                                        Text(
+                                          match.awayTeam.name,
+                                          style: awayTeamScore < homeTeamScore
+                                              ? const TextStyle(
+                                                  fontWeight: FontWeight.w300)
+                                              : null,
+                                        )
+                                      ],
+                                    ),
+                                    Text(match.status),
+                                    WinnerScore(
+                                      awayTeam: awayTeamScore,
+                                      homeTeam: homeTeamScore,
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 12),
                               ],
                             ),
                           ),

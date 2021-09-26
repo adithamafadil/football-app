@@ -14,7 +14,12 @@ class WinnerScore extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('$homeTeam'),
+            Text(
+              '$homeTeam',
+              style: homeTeam < awayTeam
+                  ? const TextStyle(fontWeight: FontWeight.w300)
+                  : null,
+            ),
             homeTeam > awayTeam
                 ? const Icon(
                     Icons.arrow_back_ios_new,
@@ -25,7 +30,12 @@ class WinnerScore extends StatelessWidget {
         ),
         Row(
           children: [
-            Text('$awayTeam'),
+            Text(
+              '$awayTeam',
+              style: homeTeam > awayTeam
+                  ? const TextStyle(fontWeight: FontWeight.w300)
+                  : null,
+            ),
             homeTeam < awayTeam
                 ? const Icon(
                     Icons.arrow_back_ios_new,
