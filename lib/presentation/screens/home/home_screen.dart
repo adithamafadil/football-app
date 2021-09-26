@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
@@ -88,6 +89,13 @@ class HomeScreen extends StatelessWidget {
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 1,
+                                ),
+                              ),
+                              Text(
+                                competition.area.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 10,
                                 ),
                               ),
                             ],
