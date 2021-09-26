@@ -37,7 +37,7 @@ class FootballApp extends StatelessWidget {
         routerDelegate: _footBallRouter.delegate(),
         theme: ThemeData(
           tabBarTheme: TabBarTheme(
-            indicator: BoxDecoration(color: Colors.green.shade300),
+            indicator: BoxDecoration(color: Colors.indigo.shade300),
             unselectedLabelColor: Colors.grey,
           ),
           appBarTheme: const AppBarTheme(
