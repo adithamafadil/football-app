@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
 import 'package:football_app/presentation/blocs/competition/competition_bloc.dart';
-import 'package:football_app/presentation/widgets/soccer_loading.dart';
+import 'package:football_app/presentation/widgets/soccer_state_assets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,6 +24,12 @@ class HomeScreen extends StatelessWidget {
             return state.competitionState.maybeWhen(
               loading: () {
                 return const SoccerLoading();
+              },
+              error: () {
+                return const SoccerError();
+              },
+              connectionError: () {
+                return const SoccerLostConnection();
               },
               success: () {
                 return GridView.builder(

@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_app/data/models/models.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
-import 'package:football_app/presentation/widgets/soccer_loading.dart';
+import 'package:football_app/presentation/widgets/soccer_state_assets.dart';
 import 'package:football_app/presentation/widgets/winner_score.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +19,12 @@ class MatchTab extends StatelessWidget {
       return state.matchState.maybeWhen(
         loading: () {
           return const SoccerLoading();
+        },
+        error: () {
+          return const SoccerError();
+        },
+        connectionError: () {
+          return const SoccerLostConnection();
         },
         success: () {
           Map<String, List<MatchModel>> groupDate = groupBy(
