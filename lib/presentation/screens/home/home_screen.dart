@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
 import 'package:football_app/presentation/blocs/competition/competition_bloc.dart';
+import 'package:football_app/presentation/widgets/soccer_loading.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,14 +23,13 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             return state.competitionState.maybeWhen(
               loading: () {
-                return const Center(child: CircularProgressIndicator());
+                return const SoccerLoading();
               },
               success: () {
                 return GridView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     childAspectRatio: 1.25,
                   ),
@@ -45,21 +45,18 @@ class HomeScreen extends StatelessWidget {
                                   index: index));
                           context.read<MatchBloc>().add(
                                 MatchEvent.getMatch(
-                                    competitionId:
-                                        competition.id.toString()),
+                                    competitionId: competition.id.toString()),
                               );
                           context.read<StandingBloc>().add(
                                 StandingEvent.getStanding(
-                                    competitionId:
-                                        competition.id.toString()),
+                                    competitionId: competition.id.toString()),
                               );
                           context.router.pushNamed('/detail');
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Colors.indigo.shade100),
+                            border: Border.all(color: Colors.indigo.shade100),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -75,8 +72,7 @@ class HomeScreen extends StatelessWidget {
                                     fit: BoxFit.cover,
                                     placeholderBuilder: (context) =>
                                         const Center(
-                                            child:
-                                                CircularProgressIndicator()),
+                                            child: CircularProgressIndicator()),
                                   ),
                                 ),
                               ),

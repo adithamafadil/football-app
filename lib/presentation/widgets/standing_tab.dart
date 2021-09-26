@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:football_app/presentation/blocs/blocs.dart';
+import 'package:football_app/presentation/widgets/soccer_loading.dart';
 
 class StandingTab extends StatelessWidget {
   const StandingTab({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class StandingTab extends StatelessWidget {
     return BlocBuilder<StandingBloc, StandingState>(builder: (context, state) {
       return state.standingState.maybeWhen(
         loading: () {
-          return const Center(child: CircularProgressIndicator());
+          return const SoccerLoading();
         },
         success: () {
           return ListView.builder(
